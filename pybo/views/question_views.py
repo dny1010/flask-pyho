@@ -48,7 +48,7 @@ def create():
         image_path = None
         if image_file:
             # 저장 경로 설정 : 오늘 날짜 폴더생성
-            today = datetime.now().strftime('%Y%m%d%')
+            today = datetime.now().strftime('%Y%m%d')
             upload_folder = os.path.join(current_app.root_path, 'static/photo', today) # current ~ path 까지가 pybo
             os.makedirs(upload_folder, exist_ok=True)
             # 파일 저장
@@ -60,7 +60,7 @@ def create():
             image_path = f'photo/{today}/{filename}'
 
         question = Question(subject=form.subject.data, content=form.content.data, create_date=datetime.now(),
-                            user_id=g.user.id) # Models.py
+                            user_id=g.user.id, image_path=image_path) # Models.py
         db.session.add(question)
         db.session.commit()
         return redirect(url_for('main.index'))

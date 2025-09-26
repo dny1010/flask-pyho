@@ -32,6 +32,9 @@
         <tr>
             <td>{{ question_list.total - (question_list.page - 1) * question_list.per_page - loop.index0 }}</td>
             <td>
+                {% if question.image_path %}
+                <img src="{{ url_for('static', filename=question.image_path) }}" alt="썸네일" style="width:50px;">
+                {% endif %}
                 <a href="{{ url_for('question.detail', question_id = question.id) }}">{{ question.subject }}</a>
                 {% if question.answer_set | length > 0 %}
                 <span class="text-danger small"> [{{ question.answer_set | length }}] </span>
