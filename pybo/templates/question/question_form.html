@@ -1,0 +1,25 @@
+{% extends 'base.html' %} <!-- base.html을 상속받는다는 뜻 -->
+{% block content %}
+<!-- 질문등록 -->
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <form method="post" class="my-3"> <!-- method 안 쓰면 기본 get 방식 / *form 형식에서 action 작성 안 하면 현재 경로에 요청* -->
+       {% include 'form_errors.html' %}
+
+        <div class="mb-3">
+            <label for="subject">제목</label>
+            <input type="text" name="subject" id="subject" class="form-control" value="{{ form.subject.data or '' }}">
+            <!-- 오류가 나도 지워지지 않도록 해주고 빈 문자열을 NaN으로 나오는 걸 방지해주는 게 value -->
+        </div>
+        <div class="mb-3">
+            <label for="content">내용</label>
+            <textarea name="content" id="content" rows="5" class="form-control">{{ form.content.data or '' }}</textarea>
+        </div>
+<!--        {{ form.subject.label }}  question.views에 있는 form한테 전송받는 것  -->
+<!--        {{ form.subject(class="form-control") }}  => 여기 두 줄이 위에 제목 div class="mb-3"  -->
+<!--        {{ form.content.label }}-->
+<!--        {{ form.content(class="form-control") }}  => 여기 두 줄이 아래 내용 div class="mb-3"  -->
+        <button type="submit" class="btn btn-light">저장하기</button>
+    </form>
+</div>
+{% endblock %}
